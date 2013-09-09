@@ -1,0 +1,9 @@
+/*
+	Cookie Law box
+*/
+
+/* Cookie box: */
+#cookies_law { background: black; color: #BCBCBC; margin: -2px; padding: 5px; position: fixed; width: 983px; z-index: 85000; }
+/* Accept button: */
+#akceptuj_ciastka { color: #1E90FF; }
+#akceptuj_ciastka:hover { border-bottom: 1px dashed #1E90FF; color: #1E90FF; text-decoration: none; cursor: pointer; }     
