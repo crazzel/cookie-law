@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="contrib/modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http
+://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.5.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+		
+		<title lang="en">Cookie Law</title>
+		
+		<description lang="en">
+			This mod add information about cookie law on your site.
+		</description>
+				
+		<author-group>
+			<author>
+				<username>Crazzel</username>
+				<homepage>http://www.m-code.eu</homepage>
+			</author>
+		</author-group>
+		
+		
+		<installation>
+			<level>easy</level>
+			<time>120</time>
+		</installation>
+	</header>
+	
+	<action-group>
+		<copy>
+			<file from="root/styles/prosilver/theme/cookie_law.css" to="styles/prosilver/theme/cookie_law.css"/>
+		</copy>
+		<open src="includes/functions.php">
+			<edit>
+				<find><![CDATA['PRIVATE_MESSAGE_INFO_UNREAD'    => $l_privmsgs_text_unread,]]></find>
+				<action type="after-add"><![CDATA['COOKIES_ACCEPT'             => isset($_COOKIE['cookies_accept']) ? true : false,]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/template/overall_header.html">
+			<edit>
+				<find><![CDATA[<body id="phpbb" class="section-{SCRIPT_NAME} {S_CONTENT_DIRECTION}">]]></find>
+				<action type="after-add"><![CDATA[	<!-- IF not COOKIES_ACCEPT -->
+		<div id="cookies_law" >
+			We are using cookies to give you the best experience on our site. Cookies are files stored in your browser and are used by most websites to help personalise your web experience. If you "ACCEPT" setting, you are agreeing to our use of cookies.
+			<a id="akceptuj_ciastka">Accept</a>
+		</div>
+		<script type="text/javascript">
+			if(document.cookie.indexOf("cookies_accept") ===-1){
+				$("#cookies_law").show();
+			}    
+			$("#akceptuj_ciastka").click(function () {
+				SetCookie('cookies_accept','cookies_accept',365*10)
+				$("#cookies_law").remove();
+			});
+		</script>
+	<!-- ENDIF -->]]></action>
+			<find><![CDATA[</head>]]></find>
+			<action type="before-add"><![CDATA[	<!-- IF not COOKIES_ACCEPT -->
+		<script type="text/javascript">
+			function SetCookie(c_name,value,expiredays)
+			{
+				var exdate=new Date()
+				exdate.setDate(exdate.getDate()+expiredays)
+				document.cookie=c_name+ "=" +escape(value)+";path=/"+((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+			}
+		</script>
+	<!-- ENDIF -->]]></action>
+			</edit>
+		</open>
+		<open src="styles/prosilver/theme/stylesheet.css">
+			<edit>
+				<find><![CDATA[@import url("colours.css");]]></find>
+				<action type="after-add"><![CDATA[@import url("cookie_law.css");]]></action>
+			</edit>
+		</open>
+		<diy-instructions lang="en"><![CDATA[After edit, upload all modified files and go to ACP to clear style cache.]]></diy-instructions>
+		
+	</action-group>
+</mod>
