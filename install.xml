@@ -32,8 +32,27 @@
 		</copy>
 		<open src="includes/functions.php">
 			<edit>
-				<find><![CDATA['PRIVATE_MESSAGE_INFO_UNREAD'    => $l_privmsgs_text_unread,]]></find>
-				<action type="after-add"><![CDATA['COOKIES_ACCEPT'             => isset($_COOKIE['cookies_accept']) ? true : false,]]></action>
+				<find><![CDATA['PRIVATE_MESSAGE_INFO_UNREAD'	=> $l_privmsgs_text_unread,]]></find>
+				<action type="after-add"><![CDATA[// Start Cookie Law
+		'COOKIES_ACCEPT'				=> isset($_COOKIE['cookies_accept']) ? true : false,
+		'L_COOKIE_INFO'					=> $user->lang['COOKIE_INFO'],
+		// End Cookie Law]]></action>
+			</edit>
+		</open>
+		<open src="language/en/common.php">
+			<edit>
+				<find><![CDATA['FORUM_INDEX']]></find>
+				<action type="before-add"><![CDATA[// Start Cookie Law
+	'COOKIE_INFO'			=> 'We are using cookies to give you the best experience on our site. Cookies are files stored in your browser and are used by most websites to help personalise your web experience. If you "ACCEPT" setting, you are agreeing to our use of cookies. <a id="akceptuj_ciastka">Accept</a>',
+	// End Cookie Law]]></action>
+			</edit>
+		</open>
+		<open src="language/pl/common.php">
+			<edit>
+				<find><![CDATA['FORUM_INDEX']]></find>
+				<action type="before-add"><![CDATA[// Start Cookie Law
+	'COOKIE_INFO'			=> 'Używamy informacji zapisanych za pomocą plików cookies w celu zapewnienia Wam maksymalnej wygody przy korzystaniu z naszej strony. Korzystają z nich również firmy reklamowe. Jeżeli wyrażasz zgodę na zapisywanie informacji zawartych w cookies kliknij "Akceptuj", w przeciwnym wypadku wyłącz ciasteczka dla tej witryny w ustawieniach swojej przeglądarki. <a id="akceptuj_ciastka">Akceptuj</a>',
+	// End Cookie Law]]></action>
 			</edit>
 		</open>
 		<open src="styles/prosilver/template/overall_header.html">
@@ -41,8 +60,7 @@
 				<find><![CDATA[<body id="phpbb" class="section-{SCRIPT_NAME} {S_CONTENT_DIRECTION}">]]></find>
 				<action type="after-add"><![CDATA[	<!-- IF not COOKIES_ACCEPT -->
 		<div id="cookies_law" >
-			We are using cookies to give you the best experience on our site. Cookies are files stored in your browser and are used by most websites to help personalise your web experience. If you "ACCEPT" setting, you are agreeing to our use of cookies.
-			<a id="akceptuj_ciastka">Accept</a>
+			{L_COOKIE_INFO}
 		</div>
 		<script type="text/javascript">
 			if(document.cookie.indexOf("cookies_accept") ===-1){
