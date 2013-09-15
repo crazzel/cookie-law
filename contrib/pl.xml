@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http
+://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://www.phpbb.com/mods/xml/modx-1.2.6.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+		
+		<title lang="en">Cookie Law</title>
+		
+		<description lang="en">
+			This mod add information about cookie law on your site.
+		</description>
+		<description lang="pl">
+			Mod dodaje informację na temat użycia ciasteczek.
+		</description>
+				
+		<author-group>
+			<author>
+				<username>Crazzel</username>
+				<homepage>http://www.m-code.eu</homepage>
+			</author>
+		</author-group>
+		
+		
+		<mod-version>1.0.2</mod-version>
+		<installation>
+			<level>advanced</level>
+			<time>3600</time>
+			<target-version>3.0.11</target-version>
+		</installation>
+	</header>
+	
+	<action-group>
+				<open src="language/pl/common.php">
+			<edit>
+				<find><![CDATA['FORUM_INDEX']]></find>
+				<action type="before-add"><![CDATA[// Start Cookie Law
+	'COOKIE_INFO'			=> 'Używamy informacji zapisanych za pomocą plików cookies w celu zapewnienia Wam maksymalnej wygody przy korzystaniu z naszej strony. Korzystają z nich również firmy reklamowe. Jeżeli wyrażasz zgodę na zapisywanie informacji zawartych w cookies kliknij "Akceptuj", w przeciwnym wypadku wyłącz ciasteczka dla tej witryny w ustawieniach swojej przeglądarki. <a id="akceptuj_ciastka">Akceptuj</a>',
+	// End Cookie Law]]></action>
+			</edit>
+		</open>
+		
+		
+		<diy-instructions lang="en"><![CDATA[After edit, upload all modified files and go to ACP to clear style cache.]]></diy-instructions>
+		
+	</action-group>
+</mod>
